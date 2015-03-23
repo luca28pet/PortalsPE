@@ -4,13 +4,14 @@ namespace PortalsPE;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
-class Main extends PluginBase{
+class Main extends PluginBase implements Listener{
 
     /**@var Position[]*/
     public $pos1;
@@ -31,6 +32,7 @@ class Main extends PluginBase{
             "message-on-insufficient-permissions" => "You haven't permissions to use this portal"
         ));
         $this->portals = new Config($this->getDataFolder()."portals.yml", Config::YAML);
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
     public function onDisable(){
@@ -88,6 +90,7 @@ class Main extends PluginBase{
                     }
                     if(!isset($args[0])){
                         $sender->sendMessage("Please specify the portal name.");
+                        return true;
                     }
                     if($this->pos1[$sender->getId()]->getLevel()->getId() !== $this->pos2[$sender->getId()]->getLevel()->getId()){
                         $sender->sendMessage("Positions are in different levels");
@@ -109,6 +112,13 @@ class Main extends PluginBase{
                     $this->portals->save();
                     $sender->sendMessage("Portal created");
                     unset($portals);
+                    unset($this->pos1[$sender->getId()]);
+                    unset($this->pos2[$sender->getId()]);
+                    return true;
+                break;
+                default:
+                    $sender->sendMessage("Strange argument ".$subCommand.".");
+                    $sender->sendMessage($command->getUsage());
                     return true;
                 break;
             }
