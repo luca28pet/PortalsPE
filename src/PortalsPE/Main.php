@@ -101,8 +101,8 @@ class Main extends PluginBase implements Listener{
                         return true;
                     }
                     $portals = $this->portals->getAll();
-                    $portals[] = $args[0];
-                    $portals[$args[0]] = [
+                    $n = array_shift($args);
+                    $portals[$n] = [
                         "x" => $this->pos1[$sender->getId()]->getX(), "y" => $this->pos1[$sender->getId()]->getY(), "z" => $this->pos1[$sender->getId()]->getZ(),
                         "x2" => $this->pos2[$sender->getId()]->getX(), "y2" => $this->pos2[$sender->getId()]->getY(), "z2" => $this->pos2[$sender->getId()]->getZ(),
                         "level" => $this->pos1[$sender->getId()]->getLevel()->getName(),
