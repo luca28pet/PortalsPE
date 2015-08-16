@@ -1,0 +1,10 @@
+name: PortalsPE
+description: A simple portal plugin!
+author: Luca28pet
+main: PortalsPE/Main
+version: 1.0.0
+api: [1.12.0]
+commands:
+    portal:
+        usage: /portal <pos1/pos2/create> <portalname>
+        description: PortalsPE Main command.
