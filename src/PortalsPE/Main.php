@@ -80,7 +80,7 @@ class Main extends PluginBase{
             $subCommand = array_shift($args);
             switch($subCommand){
                 case "pos1":
-                    if(!$sender instanceof Player){
+                    if(!($sender instanceof Player)){
                         $sender->sendMessage("Run this command in game");
                         return true;
                     }
@@ -92,7 +92,7 @@ class Main extends PluginBase{
                     $sender->sendMessage("Please place or break the first position");
                     return true;
                 case "pos2":
-                    if(!$sender instanceof Player){
+                    if(!($sender instanceof Player)){
                         $sender->sendMessage("Run this command in game");
                         return true;
                     }
@@ -104,7 +104,7 @@ class Main extends PluginBase{
                     $sender->sendMessage("Please place or break the second position");
                     return true;
                 case "create":
-                    if(!$sender instanceof Player){
+                    if(!($sender instanceof Player)){
                         $sender->sendMessage("Run this command in game");
                         return true;
                     }
