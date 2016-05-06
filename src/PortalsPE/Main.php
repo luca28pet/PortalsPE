@@ -129,10 +129,14 @@ class Main extends PluginBase{
                         return true;
                     }
                     $this->portals[strtolower($args[0])] = [
-                        "x" => $this->pos1[$sender->getName()][0], "y" => $this->pos1[$sender->getName()][1], "z" => $this->pos1[$sender->getName()][2],
-                        "x2" => $this->pos2[$sender->getName()][0], "y2" => $this->pos2[$sender->getName()][1], "z2" => $this->pos2[$sender->getName()][2],
+                        "x" => min($this->pos1[$sender->getName()][0], $this->pos2[$sender->getName()][0]),
+                        "y" => min($this->pos1[$sender->getName()][1], $this->pos2[$sender->getName()][1]),
+                        "z" => min($this->pos1[$sender->getName()][2], $this->pos2[$sender->getName()][2]),
+                        "x2" => max($this->pos1[$sender->getName()][0], $this->pos2[$sender->getName()][0]),
+                        "y2" => max($this->pos1[$sender->getName()][1], $this->pos2[$sender->getName()][1]),
+                        "z2" => max($this->pos1[$sender->getName()][2], $this->pos2[$sender->getName()][2]),
                         "level" => $this->pos1[$sender->getName()][3],
-                        "dx" => $sender->getX(), "dy" => $sender->getY(), "dz" => $sender->getZ(), "dlevel" => $sender->getLevel()->getName()
+                        "dx" => $sender->x, "dy" => $sender->y, "dz" => $sender->z, "dlevel" => $sender->getLevel()->getName()
                     ];
                     yaml_emit_file($this->getDataFolder()."portals.yml", $this->portals);
                     $sender->sendMessage("Portal created");
