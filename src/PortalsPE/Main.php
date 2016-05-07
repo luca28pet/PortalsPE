@@ -42,7 +42,7 @@ class Main extends PluginBase{
 
     public function isInPortal(Player $player){
         foreach($this->portals as $name => $portal){
-            if($player->x >= $portal["x"] and $player->x <= $portal["x2"] and $player->y >= ["y"] and $player->y <= $portal["y2"] and $player->z >= $portal["z"] and $player->z <= $portal["z2"] and $player->getLevel()->getName() === $portal["level"]){
+            if($player->x >= $portal["x"] and $player->x <= $portal["x2"] and $player->y >= ["y"] and $player->y <= $portal["y2"] and $player->z >= $portal["z"] and $player->z <= $portal["z2"] and $player->getLevel()->getFolderName() === $portal["level"]){
                 if($this->getConfig()->get("permission-mode") === true and !$player->hasPermission("portal.".$name)){
                     $player->sendMessage($this->getConfig()->get("message-no-perm"));
                     return false;
@@ -131,7 +131,7 @@ class Main extends PluginBase{
                         "y2" => max($this->pos1[$sender->getName()][1], $this->pos2[$sender->getName()][1]),
                         "z2" => max($this->pos1[$sender->getName()][2], $this->pos2[$sender->getName()][2]),
                         "level" => $this->pos1[$sender->getName()][3],
-                        "dx" => $sender->x, "dy" => $sender->y, "dz" => $sender->z, "dlevel" => $sender->getLevel()->getName()
+                        "dx" => $sender->x, "dy" => $sender->y, "dz" => $sender->z, "dlevel" => $sender->getLevel()->getFolderName()
                     ];
                     yaml_emit_file($this->getDataFolder()."portals.yml", $this->portals);
                     $sender->sendMessage("Portal created");
