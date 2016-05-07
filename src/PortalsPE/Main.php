@@ -146,7 +146,7 @@ class Main extends PluginBase{
                         $sender->sendMessage("You don't have permission to use this command");
                         return true;
                     }
-                    $sender->sendMessage(implode(", ", array_keys($this->portals)));
+                    $sender->sendMessage("Portals: ".implode(", ", array_keys($this->portals)));
                     return true;
                 case "delete":
                     if(!$sender->hasPermission("portalspe.admin")){
@@ -160,6 +160,43 @@ class Main extends PluginBase{
                     unset($this->portals[strtolower($args[0])]);
                     yaml_emit_file($this->getDataFolder()."portals.yml", $this->portals);
                     $sender->sendMessage("You have deleted the portal");
+                    return true;
+                case "fill":
+                    if(!$sender->hasPermission("portalspe.admin")){
+                        $sender->sendMessage("You don't have permission to use this command");
+                        return true;
+                    }
+                    if(!isset($args[0])){
+                        $sender->sendMessage("Please specify the portal name");
+                        return true;
+                    }
+                    if(!isset($args[1])){
+                        $sender->sendMessage("Please specify the block id");
+                        return true;
+                    }
+                    $name = strtolower($args[0]);
+                    if(!isset($this->portals[$name])){
+                        $sender->sendMessage("A portal with that name does not exist");
+                        return true;
+                    }
+                    $level = $this->getServer()->getLevelByName($this->portals[$name]["level"]);
+                    if($level === null){
+                        $sender->sendMessage("This portal is in a world that is not loaded");
+                        return true;
+                    }
+                    for($x = $this->portals[$name]["x"]; $x <= $this->portals[$name]["x2"]; $x++){
+                        for($y = $this->portals[$name]["y"]; $y <= $this->portals[$name]["y2"]; $y++){
+                            for($z = $this->portals[$name]["z"]; $z <= $this->portals[$name]["z2"]; $z++){
+                                if($level->getBlockIdAt($x, $y, $z) === 0){
+                                    $level->setBlockIdAt($x, $y, $z, $args[1]);
+                                    if(isset($args[2])){
+                                        $level->setBlockDataAt($x, $y, $z, $args[2]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    $sender->sendMessage("Portal filled");
                     return true;
                 default:
                     $sender->sendMessage("Strange argument ".$subCommand.".");
