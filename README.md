@@ -20,22 +20,22 @@ A PocketMine-MP portal plugin.
 
 **Config:**
 `---
-#Choose how the plugin detects players movement: use "event" to use PlayerMoveEvent or "task" to use a repeating task
-#Best choice may be "event"
+\#Choose how the plugin detects players movement: use "event" to use PlayerMoveEvent or "task" to use a repeating task
+\#Best choice may be "event"
 movement-detection: "event"
 
-#Task time in seconds (only matters when "task" is selected in the previous field)
+\#Task time in seconds (only matters when "task" is selected in the previous field)
 task-time: 3
 
-#Automatically loads worlds if they are not loaded when a player enters a portal (true or false)
+\#Automatically loads worlds if they are not loaded when a player enters a portal (true or false)
 auto-load: true
 
-#If you set this to true, the plugin will check if the player has the right permission to use the portal
-#For example, if a player enters the portal "survival", he will be teleported only if he has the permission "portal.survival" (you can use a permission manager like PurePerms)
-#Otherwise, if this is false, every player can use every portal
+\#If you set this to true, the plugin will check if the player has the right permission to use the portal
+\#For example, if a player enters the portal "survival", he will be teleported only if he has the permission "portal.survival" (you can use a permission manager like PurePerms)
+\#Otherwise, if this is false, every player can use every portal
 permission-mode: false
 
-#Language for players messages
+\#Language for players messages
 message-error: "The destination of this portal is in a world that does not exixts or is not loaded"
 message-tp: "You have entered the portal"
 message-no-perm: "You do not have permission to use this portal"
