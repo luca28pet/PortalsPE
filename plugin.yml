@@ -1,6 +1,7 @@
 name: PortalsPE
 main: PortalsPE\Main
 api: 2.0.0
+version: 1.0
 author: luca28pet
 description: A portals plugin
 commands:
