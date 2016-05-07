@@ -50,7 +50,7 @@ class Main extends PluginBase{
             if($player->x >= $portal["x"] and $player->x <= $portal["x2"] and $player->y >= ["y"] and $player->y <= $portal["y2"] and $player->z >= $portal["z"] and $player->z <= $portal["z2"] and $player->getLevel()->getName() === $portal["level"]){
                 if($this->getConfig()->get("permission-mode") === true and !$player->hasPermission("portal.".$name)){
                     $player->sendMessage($this->getConfig()->get("message-no-perm"));
-                    return true;
+                    return false;
                 }
                 if(!$this->getServer()->isLevelGenerated($portal["dlevel"])){
                     $player->sendMessage($this->getConfig()->get("message-error"));
