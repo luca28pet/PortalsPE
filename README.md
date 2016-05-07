@@ -20,7 +20,7 @@ A PocketMine-MP portal plugin.
 
 **Config:**
 
-`---
+```---
 
 \#Choose how the plugin detects players movement: use "event" to use PlayerMoveEvent or "task" to use a repeating task
 
@@ -52,4 +52,4 @@ message-tp: "You have entered the portal"
 
 message-no-perm: "You do not have permission to use this portal"
 
-...`
+...```
