@@ -41,8 +41,11 @@ class Main extends PluginBase{
     }
 
     public function isInPortal(Player $player){
+        $x = round($player->x);
+        $y = round($player->y);
+        $z = round($player->z);
         foreach($this->portals as $name => $portal){
-            if($player->x >= $portal["x"] and $player->x <= $portal["x2"] and $player->y >= ["y"] and $player->y <= $portal["y2"] and $player->z >= $portal["z"] and $player->z <= $portal["z2"] and $player->getLevel()->getFolderName() === $portal["level"]){
+            if(($x >= $portal["x"] and $x <= $portal["x2"]) and ($y >= $portal["y"] and $y <= $portal["y2"]) and ($z >= $portal["z"] and $z <= $portal["z2"]) and $player->getLevel()->getFolderName() === $portal["level"]){
                 if($this->getConfig()->get("permission-mode") === true and !$player->hasPermission("portal.".$name)){
                     $player->sendMessage($this->getConfig()->get("message-no-perm"));
                     return false;
@@ -95,7 +98,7 @@ class Main extends PluginBase{
                         $sender->sendMessage("You don't have permission to use this command");
                         return true;
                     }
-                    $this->sel1[$sender->getName()] = true;
+                    $this->sel2[$sender->getName()] = true;
                     $sender->sendMessage("Please place or break the second position");
                     return true;
                 case "create":
@@ -115,11 +118,11 @@ class Main extends PluginBase{
                         $sender->sendMessage("Please specify the portal name");
                         return true;
                     }
-                    if($this->pos1[3] !== $this->pos2[3]){
+                    if($this->pos1[$sender->getName()][3] !== $this->pos2[$sender->getName()][3]){
                         $sender->sendMessage("Positions are in different levels");
                         return true;
                     }
-                    if(isset($this->portals[$args[0]])){
+                    if(isset($this->portals[strtolower($args[0])])){
                         $sender->sendMessage("A portal with that name already exists");
                         return true;
                     }
@@ -144,6 +147,19 @@ class Main extends PluginBase{
                         return true;
                     }
                     $sender->sendMessage(implode(", ", array_keys($this->portals)));
+                    return true;
+                case "delete":
+                    if(!$sender->hasPermission("portalspe.admin")){
+                        $sender->sendMessage("You don't have permission to use this command");
+                        return true;
+                    }
+                    if(!isset($this->portals[strtolower($args[0])])){
+                        $sender->sendMessage("A portal with that name does not exist");
+                        return true;
+                    }
+                    unset($this->portals[strtolower($args[0])]);
+                    yaml_emit_file($this->getDataFolder()."portals.yml", $this->portals);
+                    $sender->sendMessage("You have deleted the portal");
                     return true;
                 default:
                     $sender->sendMessage("Strange argument ".$subCommand.".");
