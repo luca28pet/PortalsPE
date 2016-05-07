@@ -12,15 +12,10 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase{
 
-    /** @var array */
-    public $sel1;
-    /** @var array */
-    public $sel2;
-    /** @var Position[] */
-    public $pos1;
-    /** @var Position[] */
-    public $pos2;
-    /** @var array */
+    public $sel1 = [];
+    public $sel2 = [];
+    public $pos1 = [];
+    public $pos2 = [];
     public $portals;
 
     public function onEnable(){
