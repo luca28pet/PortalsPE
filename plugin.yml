@@ -7,7 +7,7 @@ description: A portals plugin
 commands:
   portal:
     description: Main PortalsPE commmand
-    usage: /portal pos1|pos2|create|list|delete <name>|fill <name> [fillid] [fillmeta]
+    usage: /portal pos1|pos2|create|list|delete <name>|fill <name> <fillid>
     permission: portal.admin
 permission:
   portal.admin:
