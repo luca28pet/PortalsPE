@@ -18,7 +18,7 @@ class Main extends PluginBase{
     public $pos2 = [];
     public $portals;
 
-    public function onEnable(){
+    public function onEnable() : void{
         $this->saveDefaultConfig();
         if(!file_exists($this->getDataFolder()."portals.yml")){
             yaml_emit_file($this->getDataFolder()."portals.yml", []);
@@ -36,11 +36,11 @@ class Main extends PluginBase{
         }
     }
 
-    public function onDisable(){
+    public function onDisable() : void{
         yaml_emit_file($this->getDataFolder()."portals.yml", $this->portals);
     }
 
-    public function isInPortal(Player $player){
+    public function isInPortal(Player $player) : bool{
         $x = round($player->x);
         $y = round($player->y);
         $z = round($player->z);
@@ -70,7 +70,7 @@ class Main extends PluginBase{
         return false;
     }
 
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         if(strtolower($command->getName()) === "portal"){
             if(!isset($args[0])){
                 return false;
