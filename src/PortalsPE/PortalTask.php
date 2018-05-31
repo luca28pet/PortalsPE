@@ -13,7 +13,7 @@ class PortalTask extends PluginTask{
         $this->plugin = $plugin;
     }
 
-    public function onRun($currentTick){
+    public function onRun(int $currentTick){
         foreach($this->plugin->getServer()->getOnlinePlayers() as $p){
             $this->plugin->isInPortal($p);
         }
