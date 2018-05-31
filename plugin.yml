@@ -8,8 +8,8 @@ commands:
   portal:
     description: Main PortalsPE commmand
     usage: /portal pos1|pos2|create|list
-    permission: portal.admin
+    permission: portalspe.admin
 permission:
-  portal.admin:
+  portalspe.admin:
     description: admin command
     default: op

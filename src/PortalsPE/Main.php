@@ -56,7 +56,10 @@ class Main extends PluginBase{
                 }
                 if(!$this->getServer()->isLevelLoaded($portal["dlevel"])){
                     if($this->getConfig()->get("auto-load") === true){
-                        $this->getServer()->loadLevel($portal["dlevel"]);
+                        if(!$this->getServer()->loadLevel($portal["dlevel"])){
+                            $player->sendMessage($this->getConfig()->get("message-error"));
+                            return false;
+                        }
                     }else{
                         $player->sendMessage($this->getConfig()->get("message-error"));
                         return false;
