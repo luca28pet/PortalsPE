@@ -16,7 +16,7 @@ class EventListener implements Listener{
     }
 
     public function onMove(PlayerMoveEvent $event) : void{
-        if(!$event->getFrom()->equals($event->getTo()) and $event->getTo()->distanceSquared($event->getFrom()) > 0.01){
+        if(!$event->getFrom()->equals($event->getTo()) && $event->getTo()->distanceSquared($event->getFrom()) > 0.01){
             $this->plugin->isInPortal($event->getPlayer());
         }
     }
@@ -24,12 +24,12 @@ class EventListener implements Listener{
     public function onPlace(BlockPlaceEvent $event) : void{
         if(isset($this->plugin->sel1[$event->getPlayer()->getName()])){
             $this->plugin->pos1[$event->getPlayer()->getName()] = [$event->getBlock()->x, $event->getBlock()->y, $event->getBlock()->z, $event->getBlock()->level->getFolderName()];
-            $event->getPlayer()->sendMessage("Position 1 set");
+            $event->getPlayer()->sendMessage('Position 1 set');
             unset($this->plugin->sel1[$event->getPlayer()->getName()]);
             $event->setCancelled();
         }elseif(isset($this->plugin->sel2[$event->getPlayer()->getName()])){
             $this->plugin->pos2[$event->getPlayer()->getName()] = [$event->getBlock()->x, $event->getBlock()->y, $event->getBlock()->z, $event->getBlock()->level->getFolderName()];
-            $event->getPlayer()->sendMessage("Position 2 set");
+            $event->getPlayer()->sendMessage('Position 2 set');
             unset($this->plugin->sel2[$event->getPlayer()->getName()]);
             $event->setCancelled();
         }    
@@ -38,12 +38,12 @@ class EventListener implements Listener{
     public function onBreak(BlockBreakEvent $event) : void{
         if(isset($this->plugin->sel1[$event->getPlayer()->getName()])){
             $this->plugin->pos1[$event->getPlayer()->getName()] = [$event->getBlock()->x, $event->getBlock()->y, $event->getBlock()->z, $event->getBlock()->level->getFolderName()];
-            $event->getPlayer()->sendMessage("Position 1 set");
+            $event->getPlayer()->sendMessage('Position 1 set');
             unset($this->plugin->sel1[$event->getPlayer()->getName()]);
             $event->setCancelled();
         }elseif(isset($this->plugin->sel2[$event->getPlayer()->getName()])){
             $this->plugin->pos2[$event->getPlayer()->getName()] = [$event->getBlock()->x, $event->getBlock()->y, $event->getBlock()->z, $event->getBlock()->level->getFolderName()];
-            $event->getPlayer()->sendMessage("Position 2 set");
+            $event->getPlayer()->sendMessage('Position 2 set');
             unset($this->plugin->sel2[$event->getPlayer()->getName()]);
             $event->setCancelled();
         }

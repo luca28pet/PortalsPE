@@ -2,14 +2,13 @@
 
 namespace PortalsPE;
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 
-class PortalTask extends PluginTask{
+class PortalTask extends Task {
     
     private $plugin;
     
     public function __construct(Main $plugin){
-        parent::__construct($plugin);
         $this->plugin = $plugin;
     }
 
