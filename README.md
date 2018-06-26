@@ -1,6 +1,10 @@
 # PortalsPE
 A PocketMine-MP portal plugin.
 
+Latest release: https://poggit.pmmp.io/p/PortalsPE/
+
+Latest development phars: https://poggit.pmmp.io/ci/luca28pet/PortalsPE/PortalsPE
+
 **How to create a portal:**
 - _/portal pos1_, then break the first position
 - _/portal pos2_, then break the second position
@@ -16,7 +20,7 @@ A PocketMine-MP portal plugin.
 - _/portal fill portalName blockId_: fill a portal with a block
 
 **Permissions:**
-- portal.admin: access to the main command
+- portalspe.admin: access the main command
 
 **Config:**
 
