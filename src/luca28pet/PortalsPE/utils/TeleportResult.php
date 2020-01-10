@@ -27,8 +27,4 @@ class TeleportResult{
         return $this->result;
     }
 
-    public function setResult(int $result) : void{
-        $this->result = $result;
-    }
-
 }
