@@ -1,15 +1,17 @@
 name: PortalsPE
-main: PortalsPE\Main
+main: luca28pet\PortalsPE\Main
 api: 3.0.0
-version: 1.1.1
+version: 2.0.0
 author: luca28pet
 description: A portals plugin
-commands:
-  portal:
-    description: Main PortalsPE commmand
-    usage: /portal pos1|pos2|create|list
-    permission: portalspe.admin
 permission:
-  portalspe.admin:
-    description: admin command
+  portalspe:
     default: op
+    children:
+      portalspe.portal:
+        default: false
+      portalspe.command:
+        default: false
+        children:
+          portalspe.command.portal:
+            default: op
