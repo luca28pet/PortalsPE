@@ -110,7 +110,7 @@ class Portal{
             'selection' => $this->selection->toArray(),
             'destination' => ['x' => $this->destination->x, 'y' => $this->destination->y, 'z' => $this->destination->z, 'yaw' => $this->destination->yaw, 'pitch' => $this->destination->pitch],
             'destinationFolderName' => $this->destinationFolderName,
-            'flags' => $this->flagsManager->getSet()
+            'flags' => $this->flagsManager->getFlags()
         ];
     }
 

@@ -14,60 +14,60 @@ class FlagsManager{
     ];
 
     /** @var array */
-    private $set;
+    private $flags;
 
     public function __construct(array $data){
-        $this->set = [];
+        $this->flags = [];
         foreach(self::DEFAULTS as $flag => $defaultValue){
-            $this->set[$flag] = $data[$flag] ?? $defaultValue;
+            $this->flags[$flag] = $data[$flag] ?? $defaultValue;
         }
     }
 
     public function getPermissionMode() : bool{
-        return $this->set['permissionMode'];
+        return $this->flags['permissionMode'];
     }
 
     public function setPermissionMode(bool $mode) : void{
-        $this->set['permissionMode'] = $mode;
+        $this->flags['permissionMode'] = $mode;
     }
 
     public function getAutoLoad() : bool{
-        return $this->set['autoload'];
+        return $this->flags['autoload'];
     }
 
     public function setAutoLoad(bool $autoload) : void{
-        $this->set['autoload'] = $autoload;
+        $this->flags['autoload'] = $autoload;
     }
 
     public function getCommands() : array{
-        return $this->set['commands'];
+        return $this->flags['commands'];
     }
 
     public function setCommands(array $commands) : void{
-        $this->set['commands'] = $commands;
+        $this->flags['commands'] = $commands;
     }
 
     public function hasCommand(string $cmd) : bool{
-        return in_array($cmd, $this->set['commands'], true);
+        return in_array($cmd, $this->flags['commands'], true);
     }
 
     public function addCommand(string $cmd) : void{
-        $this->set['commands'][] = $cmd;
+        $this->flags['commands'][] = $cmd;
     }
 
     public function removeCommand(string $cmd) : void{
-        $key = array_search($cmd, $this->set['commands'], true);
+        $key = array_search($cmd, $this->flags['commands'], true);
         if($key !== false){
-            unset($this->set['commands'][$key]);
+            unset($this->flags['commands'][$key]);
         }
     }
 
-    public function getSet() : array{
-        return $this->set;
+    public function getFlags() : array{
+        return $this->flags;
     }
 
-    public function setSet(array $set) : void{
-        $this->set = $set;
+    public function setFlags(array $flags) : void{
+        $this->flags = $flags;
     }
 
 }

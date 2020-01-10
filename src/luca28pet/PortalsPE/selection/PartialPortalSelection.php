@@ -4,12 +4,16 @@ namespace luca28pet\PortalsPE\selection;
 
 use pocketmine\math\Vector3;
 
+/**
+ * Objects of this class are created when a player begins a selection for a portal
+ */
 class PartialPortalSelection{
 
     /** @var null|Vector3 */
     protected $firstBlock;
     /** @var null|string */
     private $firstBlockFolderName;
+
     /** @var null|Vector3 */
     protected $secondBlock;
     /** @var null|string */
@@ -26,15 +30,12 @@ class PartialPortalSelection{
         return $this->firstBlock;
     }
 
-    public function setFirstBlock(?Vector3 $firstBlock) : void{
-        $this->firstBlock = $firstBlock;
-    }
-
     public function getFirstBlockFolderName() : ?string{
         return $this->firstBlockFolderName;
     }
 
-    public function setFirstBlockFolderName(?string $firstBlockFolderName) : void{
+    public function setFirstBlockWithFolderName(Vector3 $firstBlock, string $firstBlockFolderName) : void{
+        $this->firstBlock = $firstBlock;
         $this->firstBlockFolderName = $firstBlockFolderName;
     }
 
@@ -42,22 +43,25 @@ class PartialPortalSelection{
         return $this->secondBlock;
     }
 
-    public function setSecondBlock(?Vector3 $secondBlock) : void{
-        $this->secondBlock = $secondBlock;
-    }
-
     public function getSecondBlockFolderName() : ?string{
         return $this->secondBlockFolderName;
     }
 
-    public function setSecondBlockFolderName(?string $secondBlockFolderName) : void{
+    public function setSecondBlockWithFolderName(?Vector3 $secondBlock, string $secondBlockFolderName) : void{
+        $this->secondBlock = $secondBlock;
         $this->secondBlockFolderName = $secondBlockFolderName;
     }
 
+    /**
+     * @return bool True if the player has selected both positions, false otherwise
+     */
     public function isComplete() : bool{
         return $this->firstBlock !== null && $this->secondBlock !== null && $this->firstBlockFolderName !== null && $this->secondBlockFolderName !== null;
     }
 
+    /**
+     * @return bool True if the player has selected both positions and in the same level, false otherwise
+     */
     public function isValid() : bool{
         return $this->isComplete() && $this->firstBlockFolderName === $this->secondBlockFolderName;
     }
