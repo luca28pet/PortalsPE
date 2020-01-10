@@ -11,7 +11,7 @@ use luca28pet\PortalsPE\selection\CompletePortalSelection;
 use luca28pet\PortalsPE\session\SessionManager;
 use luca28pet\PortalsPE\task\PortalTask;
 use luca28pet\PortalsPE\utils\LookingVector3;
-use luca28pet\PortalsPE\utils\TeleportResult;
+use luca28pet\PortalsPE\utils\PortalResponse;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use function file_exists;
@@ -72,13 +72,14 @@ class Main extends PluginBase{
             /** @var Portal $portal */
             if($portal->isInside($player)){
                 switch($portal->onEnter($player)->getResult()){
-                    case TeleportResult::SUCCESS:
-                        $player->sendMessage($this->getConfig()->get('message-tp'));
+                    case PortalResponse::SUCCESS_TP:
+                    case PortalResponse::SUCCESS_NO_TP:
+                        $player->sendMessage($this->getConfig()->get('message-success'));
                         break;
-                    case TeleportResult::NO_PERM:
+                    case PortalResponse::NO_PERM:
                         $player->sendMessage($this->getConfig()->get('message-no-perm'));
                         break;
-                    case TeleportResult::WORLD_NOT_LOADED:
+                    case PortalResponse::WORLD_NOT_LOADED:
                         $player->sendMessage($this->getConfig()->get('message-error'));
                         break;
                 }

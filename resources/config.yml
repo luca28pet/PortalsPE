@@ -9,5 +9,5 @@ task-time: 3
 #Language for players messages
 message-error: "The destination of this portal is in a world that does not exist or is not loaded"
 message-no-perm: "You do not have permission to use this portal"
-message-tp: "You have entered the portal"
+message-success: "You have entered the portal"
 ...

@@ -8,6 +8,7 @@ use function in_array;
 class FlagsManager{
 
     public const DEFAULTS = [
+        'teleport' => true,
         'permissionMode' => true,
         'autoload' => true,
         'commands' => [],
@@ -21,6 +22,14 @@ class FlagsManager{
         foreach(self::DEFAULTS as $flag => $defaultValue){
             $this->flags[$flag] = $data[$flag] ?? $defaultValue;
         }
+    }
+
+    public function getTeleport() : bool{
+        return $this->flags['teleport'];
+    }
+
+    public function setTeleport(bool $tp) : void{
+        $this->flags['teleport'] = $tp;
     }
 
     public function getPermissionMode() : bool{

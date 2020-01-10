@@ -5,7 +5,7 @@ namespace luca28pet\PortalsPE;
 use luca28pet\PortalsPE\flag\FlagsManager;
 use luca28pet\PortalsPE\selection\CompletePortalSelection;
 use luca28pet\PortalsPE\utils\LookingVector3;
-use luca28pet\PortalsPE\utils\TeleportResult;
+use luca28pet\PortalsPE\utils\PortalResponse;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\level\Location;
 use pocketmine\level\Position;
@@ -82,26 +82,34 @@ class Portal{
         return $this->selection->isInside($position);
     }
 
-    public function onEnter(Player $player) : TeleportResult{
+    public function onEnter(Player $player) : PortalResponse{
         if($this->flagsManager->getPermissionMode() && !$player->hasPermission('portalspe.portal.'.$this->name)){
-            return new TeleportResult(TeleportResult::NO_PERM);
+            return new PortalResponse(PortalResponse::NO_PERM);
         }
-        $level = $player->getServer()->getLevelByName($this->destinationFolderName);
-        if($level === null){
-            if($this->flagsManager->getAutoLoad()){
-                if(!$this->autoloadDestination($player->getServer())){
-                    return new TeleportResult(TeleportResult::WORLD_NOT_LOADED);
-                }
-            }else{
-                return new TeleportResult(TeleportResult::WORLD_NOT_LOADED);
-            }
+
+        if($this->flagsManager->getTeleport()){
             $level = $player->getServer()->getLevelByName($this->destinationFolderName);
+            if($level === null){
+                if($this->flagsManager->getAutoLoad()){
+                    if(!$this->autoloadDestination($player->getServer())){
+                        return new PortalResponse(PortalResponse::WORLD_NOT_LOADED);
+                    }
+                }else{
+                    return new PortalResponse(PortalResponse::WORLD_NOT_LOADED);
+                }
+                $level = $player->getServer()->getLevelByName($this->destinationFolderName);
+            }
+            $player->teleport(new Location($this->destination->x, $this->destination->y, $this->destination->z, $this->destination->yaw, $this->destination->pitch, $level));
+            foreach($this->flagsManager->getCommands() as $cmd){
+                $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getDisplayName(), $this->name], $cmd));
+            }
+            return new PortalResponse(PortalResponse::SUCCESS_TP);
         }
-        $player->teleport(new Location($this->destination->x, $this->destination->y, $this->destination->z, $this->destination->yaw, $this->destination->pitch, $level));
+
         foreach($this->flagsManager->getCommands() as $cmd){
             $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getDisplayName(), $this->name], $cmd));
         }
-        return new TeleportResult(TeleportResult::SUCCESS);
+        return new PortalResponse(PortalResponse::SUCCESS_NO_TP);
     }
 
     public function toArray() : array{

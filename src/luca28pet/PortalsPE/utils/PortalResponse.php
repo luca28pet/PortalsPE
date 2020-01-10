@@ -6,11 +6,12 @@ use InvalidArgumentException;
 use ReflectionClass;
 use function in_array;
 
-class TeleportResult{
+class PortalResponse{
 
-    public const SUCCESS = 0;
-    public const NO_PERM = 1;
-    public const WORLD_NOT_LOADED = 2;
+    public const SUCCESS_TP = 0;
+    public const SUCCESS_NO_TP = 1;
+    public const NO_PERM = 2;
+    public const WORLD_NOT_LOADED = 3;
 
     /** @var int */
     private $result;

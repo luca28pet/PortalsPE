@@ -126,6 +126,24 @@ class PortalCommand extends Command implements PluginIdentifiableCommand{
                 }
                 $flagName = strtolower(array_shift($args));
                 switch($flagName){
+                    case 'teleport':
+                        if(!isset($args[0])){
+                            $sender->sendMessage('Please state flag value. Allowed values: true, false');
+                            return true;
+                        }
+                        $value = strtolower(array_shift($args));
+                        if($value !== 'true' && $value !== 'false'){
+                            $sender->sendMessage('Flag value '.$value.' not allowed for flag teleport. Allowed values: true, false');
+                            return true;
+                        }
+                        if($value === 'true'){
+                            $portal->getFlagsManager()->setTeleport(true);
+                        }else{
+                            $portal->getFlagsManager()->setTeleport(false);
+                        }
+                        $this->plugin->savePortals();
+                        $sender->sendMessage('Flag teleport set to '.$value.' for portal '.$portalName);
+                        return true;
                     case 'permissionmode':
                         if(!isset($args[0])){
                             $sender->sendMessage('Please state flag value. Allowed values: true, false');
