@@ -15,7 +15,7 @@ class FlagsManager{
     ];
 
     /** @var array */
-    protected $flags;
+    private $flags;
 
     public function __construct(array $data){
         $this->flags = [];
