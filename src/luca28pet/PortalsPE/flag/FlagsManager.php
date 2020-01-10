@@ -15,12 +15,17 @@ class FlagsManager{
     ];
 
     /** @var array */
-    private $flags;
+    protected $flags;
 
     public function __construct(array $data){
         $this->flags = [];
+        foreach($data as $flag => $value){
+            $this->flags[$flag] = $value;
+        }
         foreach(self::DEFAULTS as $flag => $defaultValue){
-            $this->flags[$flag] = $data[$flag] ?? $defaultValue;
+            if(!isset($this->flags[$flag])){
+                $this->flags[$flag] = $defaultValue;
+            }
         }
     }
 
