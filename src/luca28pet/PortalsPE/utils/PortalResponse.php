@@ -5,7 +5,6 @@ namespace luca28pet\PortalsPE\utils;
 use BadMethodCallException;
 use InvalidArgumentException;
 use ReflectionClass;
-use function in_array;
 
 /**
  * @method static PortalResponse SUCCESS_TP()
@@ -15,7 +14,7 @@ use function in_array;
  */
 class PortalResponse{
 
-    private static $responses = [];
+    private static $objects = [];
 
     public const SUCCESS_TP = 0;
     public const SUCCESS_NO_TP = 1;
@@ -28,22 +27,22 @@ class PortalResponse{
     public static function init() : void{
         $ref = new ReflectionClass(__CLASS__);
         foreach($ref->getConstants() as $c => $v){
-            self::addResponse($c, $v);
+            self::addObject($c, $v);
         }
     }
 
-    public static function addResponse(string $name, int $value) : void{
-        self::$responses[$name] = new PortalResponse($value);
+    public static function addObject(string $name, int $value) : void{
+        self::$objects[$name] = new self($value);
     }
 
     public static function __callStatic(string $name, array $arguments) : PortalResponse{
-        if(!in_array($name, self::$responses, true)){
-            throw new BadMethodCallException('Invalid teleport result '.$name);
+        if(!isset(self::$objects[$name])){
+            throw new BadMethodCallException(__CLASS__.' does not have constant '.$name);
         }
         if($arguments !== []){
             throw new InvalidArgumentException('Can\'t call with arguments');
         }
-        return self::$responses[$name];
+        return self::$objects[$name];
     }
 
     private function __construct(int $result){
