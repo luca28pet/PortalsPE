@@ -101,13 +101,13 @@ class Portal{
             }
             $player->teleport(new Location($this->destination->x, $this->destination->y, $this->destination->z, $this->destination->yaw, $this->destination->pitch, $level));
             foreach($this->flagsManager->getCommands() as $cmd){
-                $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getDisplayName(), $this->name], $cmd));
+                $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getName(), $this->name], $cmd));
             }
             return new PortalResponse(PortalResponse::SUCCESS_TP);
         }
 
         foreach($this->flagsManager->getCommands() as $cmd){
-            $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getDisplayName(), $this->name], $cmd));
+            $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getName(), $this->name], $cmd));
         }
         return new PortalResponse(PortalResponse::SUCCESS_NO_TP);
     }

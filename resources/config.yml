@@ -1,4 +1,7 @@
 ---
+#Do not edit this
+version: 1
+
 #Choose how the plugin detects players movement: use "event" to use PlayerMoveEvent or "task" to use a repeating task
 #Best choice may be "task"
 movement-detection: "task"
@@ -6,8 +9,9 @@ movement-detection: "task"
 #Task time in seconds (only matters when "task" is selected in the previous field)
 task-time: 3
 
-#Language for players messages
-message-error: "The destination of this portal is in a world that does not exist or is not loaded"
-message-no-perm: "You do not have permission to use this portal"
-message-success: "You have entered the portal"
+#Language for players messages. You can use {player} and {portal} variables
+lang:
+  error: "The destination of this portal is in a world that does not exist or is not loaded"
+  no-perm: "You do not have permission to use this portal"
+  success: "You have entered the portal"
 ...
