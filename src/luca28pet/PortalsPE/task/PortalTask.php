@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_types=1);
 
 namespace luca28pet\PortalsPE\task;
-
 
 use luca28pet\PortalsPE\Main;
 use pocketmine\scheduler\Task;
