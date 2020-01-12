@@ -4,7 +4,6 @@ namespace luca28pet\PortalsPE\utils;
 
 use InvalidArgumentException;
 use function array_keys;
-use function array_values;
 use function str_replace;
 
 class LanguageManager{
@@ -39,7 +38,7 @@ class LanguageManager{
         if(!isset($this->userLangData[$key]) && !isset($this->defaultLangData[$key])){
             throw new InvalidArgumentException('Invalid key '.$key);
         }
-        return str_replace(array_keys($params), array_values($params), $this->userLangData[$key] ?? $this->defaultLangData[$key]);
+        return str_replace(array_keys($params), $params, $this->userLangData[$key] ?? $this->defaultLangData[$key]);
     }
 
 }
