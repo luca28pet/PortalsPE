@@ -2,11 +2,20 @@
 
 namespace luca28pet\PortalsPE\utils;
 
+use BadMethodCallException;
 use InvalidArgumentException;
 use ReflectionClass;
 use function in_array;
 
+/**
+ * @method static PortalResponse SUCCESS_TP()
+ * @method static PortalResponse SUCCESS_NO_TP()
+ * @method static PortalResponse NO_PERM()
+ * @method static PortalResponse WORLD_NOT_LOADED()
+ */
 class PortalResponse{
+
+    private static $responses = [];
 
     public const SUCCESS_TP = 0;
     public const SUCCESS_NO_TP = 1;
@@ -16,11 +25,28 @@ class PortalResponse{
     /** @var int */
     private $result;
 
-    public function __construct(int $result){
+    public static function init() : void{
         $ref = new ReflectionClass(__CLASS__);
-        if(!in_array($result, $ref->getConstants(), true)){
-            throw new InvalidArgumentException('Invalid teleport result '.$result);
+        foreach($ref->getConstants() as $c => $v){
+            self::addResponse($c, $v);
         }
+    }
+
+    public static function addResponse(string $name, int $value) : void{
+        self::$responses[$name] = new PortalResponse($value);
+    }
+
+    public static function __callStatic(string $name, array $arguments) : PortalResponse{
+        if(!in_array($name, self::$responses, true)){
+            throw new BadMethodCallException('Invalid teleport result '.$name);
+        }
+        if($arguments !== []){
+            throw new InvalidArgumentException('Can\'t call with arguments');
+        }
+        return self::$responses[$name];
+    }
+
+    private function __construct(int $result){
         $this->result = $result;
     }
 

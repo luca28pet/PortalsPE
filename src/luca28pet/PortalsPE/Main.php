@@ -78,6 +78,8 @@ class Main extends PluginBase{
         }
         $this->langManager = new LanguageManager($this->getConfig()->get('lang'), yaml_parse($contents));
 
+        PortalResponse::init();
+
         $this->getServer()->getCommandMap()->register('portalspe', new PortalCommand($this));
 
         $this->getServer()->getPluginManager()->registerEvents(new BlockBreakEventListener($this), $this);

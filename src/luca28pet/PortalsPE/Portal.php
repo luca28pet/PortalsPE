@@ -84,7 +84,7 @@ class Portal{
 
     public function onEnter(Player $player) : PortalResponse{
         if($this->flagsManager->getPermissionMode() && !$player->hasPermission('portalspe.portal.'.$this->name)){
-            return new PortalResponse(PortalResponse::NO_PERM);
+            return PortalResponse::NO_PERM();
         }
 
         if($this->flagsManager->getTeleport()){
@@ -92,10 +92,10 @@ class Portal{
             if($level === null){
                 if($this->flagsManager->getAutoLoad()){
                     if(!$this->autoloadDestination($player->getServer())){
-                        return new PortalResponse(PortalResponse::WORLD_NOT_LOADED);
+                        return PortalResponse::WORLD_NOT_LOADED();
                     }
                 }else{
-                    return new PortalResponse(PortalResponse::WORLD_NOT_LOADED);
+                    return PortalResponse::WORLD_NOT_LOADED();
                 }
                 $level = $player->getServer()->getLevelByName($this->destinationFolderName);
             }
@@ -103,13 +103,13 @@ class Portal{
             foreach($this->flagsManager->getCommands() as $cmd){
                 $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getName(), $this->name], $cmd));
             }
-            return new PortalResponse(PortalResponse::SUCCESS_TP);
+            return PortalResponse::SUCCESS_TP();
         }
 
         foreach($this->flagsManager->getCommands() as $cmd){
             $player->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(['{player}', '{portal}'], [$player->getName(), $this->name], $cmd));
         }
-        return new PortalResponse(PortalResponse::SUCCESS_NO_TP);
+        return PortalResponse::SUCCESS_NO_TP();
     }
 
     public function toArray() : array{
