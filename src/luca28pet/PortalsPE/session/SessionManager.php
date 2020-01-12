@@ -24,7 +24,11 @@ class SessionManager{
     }
 
     public function removeSession(Player $player) : void{
-        unset($this->sessions[$player->getName()]);
+        $ses = $this->getSession($player);
+        if($ses !== null){
+            $ses->close();
+            unset($this->sessions[$player->getName()]);
+        }
     }
 
     public function getSessions() : array{

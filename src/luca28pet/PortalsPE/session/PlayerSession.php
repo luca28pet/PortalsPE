@@ -51,4 +51,9 @@ class PlayerSession{
         $this->selectingSecondBlock = $selectingSecondBlock;
     }
 
+    public function close() : void{
+        $this->player = null;
+        $this->selection = null;
+    }
+
 }
