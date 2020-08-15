@@ -4,9 +4,9 @@ api: 3.0.0
 version: 2.0.0
 author: luca28pet
 description: A portals plugin
-permission:
+permissions:
   portalspe:
-    default: op
+    default: false
     children:
       portalspe.portal:
         default: false
