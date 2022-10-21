@@ -8,10 +8,10 @@ authors:
 description: A portals plugin
 permissions:
   portalspe:
-    default: true
+    default: false
   portalspe.portal:
-    default: true
+    default: false
   portalspe.command:
-    default: true
+    default: false
   portalspe.command.portal:
     default: op
