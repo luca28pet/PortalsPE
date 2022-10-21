@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace luca28pet\PortalsPE\selection;
 
-use pocketmine\level\Position;
 use pocketmine\math\Vector3;
+use pocketmine\world\Position;
 use function max;
 use function min;
 
@@ -48,9 +48,9 @@ class CompletePortalSelection{
     }
 
     public function isInside(Position $position) : bool{
-        $position = Position::fromObject($position->floor(), $position->getLevel());
+        $position = Position::fromObject($position->floor(), $position->getWorld());
         /** @noinspection NullPointerExceptionInspection */
-        return $position->isValid() && $position->getLevel()->getFolderName() === $this->selectionFolderName &&
+        return $position->isValid() && $position->getWorld()->getFolderName() === $this->selectionFolderName &&
             $position->x >= min($this->firstBlock->x, $this->secondBlock->x) && $position->x <= max($this->firstBlock->x, $this->secondBlock->x) &&
             $position->y >= min($this->firstBlock->y, $this->secondBlock->y) && $position->y <= max($this->firstBlock->y, $this->secondBlock->y) &&
             $position->z >= min($this->firstBlock->z, $this->secondBlock->z) && $position->z <= max($this->firstBlock->z, $this->secondBlock->z);

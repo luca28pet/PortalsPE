@@ -1,17 +1,17 @@
 name: PortalsPE
 main: luca28pet\PortalsPE\Main
-api: 3.0.0
-version: 2.0.0
+api: 4.0.0
+version: 3.0.0
 author: luca28pet
+authors:
+  - TheNote
 description: A portals plugin
 permissions:
   portalspe:
-    default: false
-    children:
-      portalspe.portal:
-        default: false
-      portalspe.command:
-        default: false
-        children:
-          portalspe.command.portal:
-            default: op
+    default: true
+  portalspe.portal:
+    default: true
+  portalspe.command:
+    default: true
+  portalspe.command.portal:
+    default: op

@@ -10,15 +10,14 @@ use luca28pet\PortalsPE\selection\CompletePortalSelection;
 use luca28pet\PortalsPE\utils\LookingVector3;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use function array_keys;
 use function array_shift;
 use function implode;
 use function strtolower;
 
-class PortalCommand extends Command implements PluginIdentifiableCommand{
+class PortalCommand extends Command {
 
     /** @var Main */
     private $plugin;
@@ -85,8 +84,8 @@ class PortalCommand extends Command implements PluginIdentifiableCommand{
                             $selection->getSecondBlock(),
                             $selection->getFirstBlockFolderName()
                         ),
-                        LookingVector3::fromObject($sender, $sender->yaw, $sender->pitch),
-                        $sender->getLevel()->getFolderName(),
+                        LookingVector3::fromObject($sender->getPosition(), $sender->getLocation()->yaw, $sender->getLocation()->pitch),
+                        $sender->getWorld()->getFolderName(),
                         []
                     )
                 );

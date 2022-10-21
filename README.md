@@ -1,4 +1,4 @@
-# PortalsPE
+# PortalsPE PM4 Release by TheNote
 A PocketMine-MP portal plugin.
 
 Latest release: https://poggit.pmmp.io/p/PortalsPE/

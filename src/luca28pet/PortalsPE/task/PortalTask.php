@@ -15,7 +15,7 @@ class PortalTask extends Task{
         $this->plugin = $plugin;
     }
 
-    public function onRun(int $currentTick) : void{
+    public function onRun() : void{
         foreach($this->plugin->getServer()->getOnlinePlayers() as $p){
             $this->plugin->checkPortal($p);
         }
