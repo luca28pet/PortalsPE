@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace luca28pet\PortalsPE\session;
 
 use luca28pet\PortalsPE\selection\PartialPortalSelection;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class PlayerSession{
 

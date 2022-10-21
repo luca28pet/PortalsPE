@@ -14,7 +14,7 @@ use luca28pet\PortalsPE\task\PortalTask;
 use luca28pet\PortalsPE\utils\LanguageManager;
 use luca28pet\PortalsPE\utils\LookingVector3;
 use luca28pet\PortalsPE\utils\PortalResponse;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use function fclose;
 use function file_exists;
@@ -104,7 +104,7 @@ class Main extends PluginBase{
     public function checkPortal(Player $player) : void{
         foreach($this->getPortals() as $portal){
             /** @var Portal $portal */
-            if($portal->isInside($player)){
+            if($portal->isInside($player->getPosition())){
                 switch($portal->onEnter($player)->getResult()){
                     case PortalResponse::SUCCESS_TP:
                     case PortalResponse::SUCCESS_NO_TP:

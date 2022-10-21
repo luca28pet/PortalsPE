@@ -13,13 +13,13 @@ class LookingVector3 extends Vector3{
     public $pitch;
 
     /**
-     * @param int|float   $x
-     * @param int|float   $y
-     * @param int|float   $z
+     * @param float|int $x
+     * @param float|int $y
+     * @param float|int $z
      * @param float $yaw
      * @param float $pitch
      */
-    public function __construct($x = 0, $y = 0, $z = 0, float $yaw = 0.0, float $pitch = 0.0){
+    public function __construct(float|int $x = 0, float|int $y = 0, float|int $z = 0, float $yaw = 0.0, float $pitch = 0.0){
         $this->yaw = $yaw;
         $this->pitch = $pitch;
         parent::__construct($x, $y, $z);

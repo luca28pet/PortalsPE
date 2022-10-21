@@ -11,13 +11,13 @@ class BlockBreakEventListener extends BaseListener{
         $ses = $this->plugin->getSessionManager()->getSession($event->getPlayer());
         if($ses !== null){
             if($ses->isSelectingFirstBlock()){
-                $event->setCancelled();
-                $ses->getSelection()->setFirstBlockWithFolderName($event->getBlock()->asVector3(), $event->getPlayer()->getLevel()->getFolderName());
+                $event->cancel();
+                $ses->getSelection()->setFirstBlockWithFolderName($event->getBlock()->getPosition()->asVector3(), $event->getPlayer()->getWorld()->getFolderName());
                 $event->getPlayer()->sendMessage('First pos set');
                 $ses->setSelectingFirstBlock(false);
             }elseif($ses->isSelectingSecondBlock()){
-                $event->setCancelled();
-                $ses->getSelection()->setSecondBlockWithFolderName($event->getBlock()->asVector3(), $event->getPlayer()->getLevel()->getFolderName());
+                $event->cancel();
+                $ses->getSelection()->setSecondBlockWithFolderName($event->getBlock()->getPosition()->asVector3(), $event->getPlayer()->getWorld()->getFolderName());
                 $event->getPlayer()->sendMessage('Second pos set');
                 $ses->setSelectingSecondBlock(false);
             }
